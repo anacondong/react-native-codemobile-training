@@ -1,0 +1,13 @@
+Install extension 
+    - vscode-icon, prettier, color highlight, path intellisense, es7, rest client, android emulator launcher
+
+npx react-native run-android
+
+snipplet react native
+rnf
+
+format > prettierrc
+
+
+** Structure
+index.js 
