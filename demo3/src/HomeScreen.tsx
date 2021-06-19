@@ -1,16 +1,25 @@
-import React from 'react'
-import { View,Text } from 'react-native'
+import React from 'react';
+import {View, Text, ImageBackground} from 'react-native';
 
-interface HomeScreenProps {
-    
-}
+interface HomeScreenProps {}
 
-const HomeScreen: React.FunctionComponent<HomeScreenProps> = (props) => {
-    return (
-        <View style={{backgroundColor:'red',flex:1}}>
-            <Text>HomeScreen</Text>
-        </View>
-    )
-}
+const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
+  return (
+    <ImageBackground
+      source={require('./assets/img/gradient_bg.png')}
+      style={{flex: 1}}>
+      {/* authen section */}
 
-export default HomeScreen
+      <View
+        style={{
+          backgroundColor: '#FFF7',
+          height: 200,
+          margin: 30,
+          borderRadius: 10,
+          flexDirection: 'column',
+        }}></View>
+    </ImageBackground>
+  );
+};
+
+export default HomeScreen;
