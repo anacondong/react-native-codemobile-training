@@ -11,3 +11,4 @@ format > prettierrc
 
 ** Structure
 index.js 
+** JSX = javascript + extension >> Render return (  ...... ... )
