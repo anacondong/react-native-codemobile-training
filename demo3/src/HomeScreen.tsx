@@ -1,5 +1,8 @@
 import React from 'react';
-import {View, Text, ImageBackground} from 'react-native';
+import {View, Text, ImageBackground, TextInput, Button
+,TouchableOpacity
+,Image
+} from 'react-native';
 
 interface HomeScreenProps {}
 
@@ -12,12 +15,81 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
       <View
         style={{
+          padding: 25,
           backgroundColor: '#FFF7',
-          height: 200,
           margin: 30,
           borderRadius: 10,
           flexDirection: 'column',
-        }}></View>
+        }}>
+        {/* Username section */}
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {/* Icon */}
+          <View
+            style={{
+              width: 35,
+              height: 35,
+              backgroundColor: 'green',
+              borderRadius: 35 / 2,
+            }}
+          />
+          <TextInput
+            placeholder="Username"
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              borderColor: '#0003',
+              borderRadius: 5,
+              marginLeft: 16,
+              paddingLeft: 16,
+            }}
+          />
+        </View>
+
+        <View style={{height: 16}}></View>
+
+        {/* Password section */}
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          {/* Icon */}
+          <View
+            style={{
+              width: 35,
+              height: 35,
+              backgroundColor: 'red',
+              borderRadius: 35 / 2,
+            }}
+          />
+          <TextInput
+            placeholder="Password"
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              borderColor: '#0003',
+              borderRadius: 5,
+              marginLeft: 16,
+              paddingLeft: 16,
+            }}
+          />
+        </View>
+
+        <View style={{height: 32}}></View>
+
+        {/* Login Btn section */}
+        <Button title="Login" onPress={() => {}} />
+
+        <View style={{height: 16}}></View>
+
+        <TouchableOpacity activeOpacity={0.5}>
+            <Text style={{textAlign:'center'}}>Register</Text>
+        </TouchableOpacity>
+      </View>
+
+    {/* Banner  */}
+    <Image 
+        source={require('./assets/img/header_react_native.png')}
+        style={{height:100,width: '100%'}}
+        resizeMode='contain'
+    />
+
     </ImageBackground>
   );
 };
