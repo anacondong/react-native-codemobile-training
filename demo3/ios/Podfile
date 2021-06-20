@@ -28,6 +28,9 @@ target 'demo3' do
 
   pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
 
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'demo3Tests' do
     inherit! :complete
     # Pods for testing

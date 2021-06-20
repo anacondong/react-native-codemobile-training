@@ -2,7 +2,7 @@ snapplet
 tsrnfi
 
 Formik >> ??
-
+https://quicktype.io/  >> json generate object interface
 
 
 ========================================================

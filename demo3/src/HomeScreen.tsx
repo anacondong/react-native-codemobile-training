@@ -10,18 +10,21 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {StackNavigationProp} from '@react-navigation/stack'
-import { RootStackParamsList } from './RootNavigationParams';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamsList} from './RootNavigationParams';
 
 interface HomeScreenProps {}
 
 // define Stack Navigation, Put ID it's self
-type HomeScreenNavigationProps = StackNavigationProp<RootStackParamsList,'Home'>;
+type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamsList,
+  'Home'
+>;
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
-  const navigation = useNavigation<HomeScreenNavigationProps>();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   React.useEffect(() => {
     console.log('Home created');
@@ -51,7 +54,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
       ),
     });
   }, []);
-
 
   return (
     <ImageBackground
@@ -120,13 +122,23 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         <View style={{height: 32}}></View>
 
         {/* Login Btn section */}
-        <Button title="Login" onPress={() => {}} />
+        <Button
+          title="Login"
+          onPress={() => {
+            navigation.navigate('Success', {
+              screen: 'Json',
+              params: {
+                username: 'admin',
+              },
+            });
+          }}
+        />
 
         <View style={{height: 16}}></View>
 
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => navigation.navigate('Register',{dummy:'1234'})}>
+          onPress={() => navigation.navigate('Register', {dummy: '1234'})}>
           <Text style={{textAlign: 'center'}}>Register</Text>
         </TouchableOpacity>
       </View>
