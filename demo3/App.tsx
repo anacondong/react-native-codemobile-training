@@ -10,7 +10,7 @@ const App: React.FunctionComponent<AppProps> = props => {
     <NavigationContainer>
       <View style={{flex: 1}}>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView />
+        {/* <SafeAreaView /> */}
         <AppNavigator />
       </View>
     </NavigationContainer>

@@ -5,11 +5,10 @@ import {
   View,
   Text,
   ImageBackground,
-  TextInput,
-  Button,
   TouchableOpacity,
   Image,
 } from 'react-native';
+import {Button, Input} from 'react-native-elements';
 import {Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -55,6 +54,10 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     });
   }, []);
 
+  const handleLogin = () => {
+    navigation.navigate('Success');
+  };
+
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
@@ -71,74 +74,38 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         }}>
         {/* Username section */}
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          {/* Icon */}
-          <View
-            style={{
-              width: 35,
-              height: 35,
-              backgroundColor: 'green',
-              borderRadius: 35 / 2,
-            }}
-          />
-          <TextInput
-            placeholder="Username"
-            style={{
-              flex: 1,
-              borderWidth: 1,
-              borderColor: '#0003',
-              borderRadius: 5,
-              marginLeft: 16,
-              paddingLeft: 16,
-            }}
+          <Input
+            autoCapitalize="none"
+            placeholder="UserName"
+            leftIcon={{type: 'font-awesome', name: 'user'}}
+            onChangeText={() => {}}
           />
         </View>
-
-        <View style={{height: 16}}></View>
 
         {/* Password section */}
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          {/* Icon */}
-          <View
-            style={{
-              width: 35,
-              height: 35,
-              backgroundColor: 'red',
-              borderRadius: 35 / 2,
-            }}
-          />
-          <TextInput
+          <Input
+            secureTextEntry
+            autoCapitalize="none"
             placeholder="Password"
-            style={{
-              flex: 1,
-              borderWidth: 1,
-              borderColor: '#0003',
-              borderRadius: 5,
-              marginLeft: 16,
-              paddingLeft: 16,
-            }}
+            leftIcon={{type: 'font-awesome', name: 'lock'}}
+            onChangeText={() => {}}
           />
         </View>
 
-        <View style={{height: 32}}></View>
-
         {/* Login Btn section */}
-        <Button
-          title="Login"
-          onPress={() => {
-            navigation.navigate('Success', {
-              screen: 'Json',
-              params: {
-                username: 'admin',
-              },
-            });
-          }}
-        />
+
+        <Button title="Login" onPress={handleLogin} />
 
         <View style={{height: 16}}></View>
 
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => navigation.navigate('Register', {dummy: '1234'})}>
+          onPress={() =>
+            navigation.navigate('Register', {
+              dummy: 'Dummy value pass by route ',
+            })
+          }>
           <Text style={{textAlign: 'center'}}>Register</Text>
         </TouchableOpacity>
       </View>

@@ -12,11 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
-import {Youtube, YoutubeData, YoutubeResult} from './types/youtube.interface';
-import {
-  YouTubeStandaloneAndroid,
-  YouTubeStandaloneIOS,
-} from 'react-native-youtube';
+import {Youtube, YoutubeResult} from './types/youtube.interface';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -69,7 +65,9 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       //         autoplay: true, // Autoplay the video
       //         startTime: 120, // Starting point of video (in seconds)
       //       })
-      //     : await YouTubeStandaloneIOS.playVideo(item.id);
+      //     : : Linking.openURL(
+      //        `https://www.youtube.com/watch?v=${item.id}`,
+      //        ).catch(err => console.error("Couldn't load page", err));
       // }}
       style={styles.listCard}>
         {/* Avatar and Title  */}

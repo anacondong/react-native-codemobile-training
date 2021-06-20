@@ -4,7 +4,8 @@ tsrnfi
 Formik >> ??
 https://quicktype.io/  >> json generate object interface
 
-
+IOS issue >> go to Xcode >> Build Phases >> remove unused 
+"copy Bundle Resources"
 ========================================================
 
 npx react-native init cmAuthenTS --template react-native-template-typescript

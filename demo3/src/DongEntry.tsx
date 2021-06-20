@@ -16,6 +16,7 @@ export const DongEntry: React.FunctionComponent<DongEntryProps> = props => {
       <Icon name={props.icon} size={30} color="#0007" style={{width: 35}} />
 
       <TextInput
+        autoCapitalize="none"
         onChangeText={props.onValueChanged}
         placeholder={props.hint}
         secureTextEntry={props.isPassword ? true : false}
