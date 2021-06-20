@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { Alert } from 'react-native';
 import {
   View,
   Text,
@@ -9,21 +10,34 @@ import {
 } from 'react-native';
 
 import {Button} from 'react-native-elements';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
+import {DongEntry} from './DongEntry';
 
 interface RegisterScreenProps {}
 
 const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
   // let count = 0; // no side effect on Render
+  const navigation = useNavigation();
+  const [account, setAccount] = useState({username: '', password: ''});
 
-  const [count, setCount] = useState(0);
+  React.useEffect(() => {
+    console.log('Register created');
+    navigation.setOptions({
+      title: 'Register',
+      headerStyle: {
+        backgroundColor: '#119CED',
+      },
+      headerTintColor: '#FFFFFF',
+      headerTitleStyle: {color: '#fff'},
+      headerBackTitle: ' ',
+    });
+  }, []);
 
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
       style={{flex: 1}}>
-      <Text>{count}</Text>
       {/* authen section */}
 
       <View
@@ -39,9 +53,8 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
           icon="user"
           hint="user name"
           onValueChanged={txt => {
-            console.log('user name =', txt);
+            setAccount({...account, username: txt});
           }}
-          
         />
 
         <View style={{height: 16}}></View>
@@ -51,10 +64,12 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
           icon="lock"
           hint="password"
           onValueChanged={txt => {
-            console.log('password =', txt);
+            setAccount({...account, password: txt});
           }}
           isPassword
         />
+
+        <Text>debug : {JSON.stringify(account)}</Text>
 
         <View style={{height: 32}}></View>
 
@@ -62,14 +77,13 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
         <Button
           title="Register"
           onPress={() => {
-            setCount(count + 1);
-            console.log('count >>', count);
+            console.log('Register');
           }}
         />
 
         <View style={{height: 16}}></View>
 
-        <Button type="outline" title="Cancel" onPress={() => {}} />
+        <Button type="outline" title="Cancel" onPress={() => {navigation.goBack}} />
 
         {/* <TouchableOpacity activeOpacity={0.5}>
             <Text style={{textAlign:'center'}}>Cancel</Text>
@@ -87,31 +101,3 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
 };
 
 export default RegisterScreen;
-
-interface DongEntryProps {
-  icon: string;
-  hint?: string;
-  onValueChanged: (tet:string) => void; // or any
-  isPassword?: boolean;
-}
-const DongEntry: React.FunctionComponent<DongEntryProps> = props => {
-  return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      {/* Icon */}
-      <Icon name={props.icon} size={30} color="#0007" style={{width: 35}} />
-      <TextInput
-        onChangeText={props.onValueChanged}
-        placeholder={props.hint}
-        secureTextEntry={props.isPassword ? true: false}
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          borderColor: '#0003',
-          borderRadius: 5,
-          marginLeft: 16,
-          paddingLeft: 16,
-        }}
-      />
-    </View>
-  );
-};

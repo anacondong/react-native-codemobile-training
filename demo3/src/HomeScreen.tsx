@@ -1,12 +1,53 @@
-import React from 'react';
-import {View, Text, ImageBackground, TextInput, Button
-,TouchableOpacity
-,Image
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
+import { Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface HomeScreenProps {}
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
+  const navigation = useNavigation();
+
+  React.useEffect(() => {
+    console.log('Home created');
+    navigation.setOptions({
+      title: 'Home',
+      headerStyle: {
+        backgroundColor: '#119CED',
+      },
+      headerTintColor: '#FFFFFF',
+      headerTitleStyle: {color: '#fff'},
+      headerBackTitle: ' ',
+      headerRight: () => (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => Alert.alert('www.codemobiles.com')}
+          style={{padding: 10}}>
+          <Icon
+            name="address-card"
+            size={20}
+            color="#fff"
+            style={{
+              height: 24,
+              width: 24,
+            }}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
+
+
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
@@ -78,18 +119,19 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
         <View style={{height: 16}}></View>
 
-        <TouchableOpacity activeOpacity={0.5}>
-            <Text style={{textAlign:'center'}}>Register</Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate('Register')}>
+          <Text style={{textAlign: 'center'}}>Register</Text>
         </TouchableOpacity>
       </View>
 
-    {/* Banner  */}
-    <Image 
+      {/* Banner  */}
+      <Image
         source={require('./assets/img/header_react_native.png')}
-        style={{height:100,width: '100%'}}
-        resizeMode='contain'
-    />
-
+        style={{height: 100, width: '100%'}}
+        resizeMode="contain"
+      />
     </ImageBackground>
   );
 };

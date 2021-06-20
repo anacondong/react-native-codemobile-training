@@ -1,6 +1,12 @@
 snapplet
 tsrnfi
 
+Formik >> ??
+
+
+
+========================================================
+
 npx react-native init cmAuthenTS --template react-native-template-typescript
 npx react-native run-android
 
