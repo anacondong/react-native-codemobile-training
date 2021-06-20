@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import {
   View,
   Text,
@@ -11,15 +11,26 @@ import {
 
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {DongEntry} from './DongEntry';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamsList} from './RootNavigationParams';
 
 interface RegisterScreenProps {}
 
+// define Stack Navigation, Put ID it's self
+type RegisterScreenNavigationProps = StackNavigationProp<
+  RootStackParamsList,
+  'Register'
+>;
+
 const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
   // let count = 0; // no side effect on Render
-  const navigation = useNavigation();
+  const navigation = useNavigation<RegisterScreenNavigationProps>();
+
   const [account, setAccount] = useState({username: '', password: ''});
+
+  const route = useRoute<RouteProp<RootStackParamsList, 'Register'>>();
 
   React.useEffect(() => {
     console.log('Register created');
@@ -38,6 +49,7 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
       style={{flex: 1}}>
+      <Text>{route.params?.dummy}</Text>
       {/* authen section */}
 
       <View
@@ -83,7 +95,13 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
 
         <View style={{height: 16}}></View>
 
-        <Button type="outline" title="Cancel" onPress={() => {navigation.goBack}} />
+        <Button
+          type="outline"
+          title="Cancel"
+          onPress={() => {
+            navigation.goBack;
+          }}
+        />
 
         {/* <TouchableOpacity activeOpacity={0.5}>
             <Text style={{textAlign:'center'}}>Cancel</Text>

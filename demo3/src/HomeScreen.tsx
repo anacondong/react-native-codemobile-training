@@ -12,11 +12,16 @@ import {
 } from 'react-native';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {StackNavigationProp} from '@react-navigation/stack'
+import { RootStackParamsList } from './RootNavigationParams';
 
 interface HomeScreenProps {}
 
+// define Stack Navigation, Put ID it's self
+type HomeScreenNavigationProps = StackNavigationProp<RootStackParamsList,'Home'>;
+
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProps>();
 
   React.useEffect(() => {
     console.log('Home created');
@@ -121,7 +126,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => navigation.navigate('Register')}>
+          onPress={() => navigation.navigate('Register',{dummy:'1234'})}>
           <Text style={{textAlign: 'center'}}>Register</Text>
         </TouchableOpacity>
       </View>
