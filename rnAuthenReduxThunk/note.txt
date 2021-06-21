@@ -1,6 +1,7 @@
 snapplet
 tsrnfi
 rxconst
+rxaction
 
 * clean path **
 sudo find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
@@ -8,6 +9,11 @@ sudo find . -name 'build' -type d -prune -exec rm -rf '{}' +
 sudo find . -name '.gradle' -type d -prune -exec rm -rf '{}' +
 sudo find . -name 'Pods' -type d -prune -exec rm -rf '{}' +
 * clean path **
+
+** camera out of memory ** >> android/app/build.gradle
+missingDimensionStrategy 'react-native-camera', 'general'
+multiDexEnabled true
+********
 
 Formik >> ??
 https://quicktype.io/  >> json generate object interface
@@ -117,3 +123,12 @@ npx react-native link react-native-permissions
 
 3. Remove DerivedData Folder
 /Users/chaiyasit/Library/Developer/Xcode/DerivedData/xxx
+
+
+
+### Redux Thunk
+yarn add redux react-redux redux-logger redux-thunk
+
+actions
+  action function >> thunk (dispatch ...) call back function
+  action type

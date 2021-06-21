@@ -18,6 +18,8 @@ import {CompositeNavigationProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList, RootTabParamsList} from './RootNavigationParams';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+import * as jsonfeedActions from './actions/jsonfeed.action'
 
 type JSONFeedScreenNavigationProps = CompositeNavigationProp<
   StackNavigationProp<RootStackParamsList, 'Success'>,
@@ -28,9 +30,7 @@ interface JSONFeedScreenProps {}
 const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
   const navigation = useNavigation<JSONFeedScreenNavigationProps>();
   const route = useRoute<RouteProp<RootStackParamsList, 'Success'>>();
-  const [dataArray, setDataArray] = React.useState<Youtube[]>([]);
-  const [isRefreshing, setIsRefreshing] = React.useState(false);
-
+  const jsonfeedReducer = useSelector(state => state.jsonfeedReducer);
   const dummyImg = [
     {
       url: 'https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/204156627_192665129325543_2208976459849398308_n.jpg?tp=1&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=103&_nc_ohc=SZC7cGhTRskAX_UMmLX&edm=AP_V10EBAAAA&ccb=7-4&oh=03e76db13604fba9c9fe8e1c540a9541&oe=60D6FB83&_nc_sid=4f375e',
@@ -87,53 +87,32 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       url: 'https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s750x750/189924339_140356644708096_8438800571872591744_n.jpg?tp=1&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=100&_nc_ohc=Nyc6vBmz_n4AX-LBRno&edm=AP_V10EBAAAA&ccb=7-4&oh=b421da5e1288b90f9eb14a520ab2599a&oe=60D7D581&_nc_sid=4f375e',
     },
   ];
+
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     // component Created >> didmount
     console.log('Json created');
-    loadData();
-
-    // // component Destroy >> didunmount
-    // return () =>{
-    //   console.log('Json Destroy');
-    // }
+    dispatch(jsonfeedActions.feedJSON()); // call action function
   }, []);
 
-  const loadData = async () => {
-    setIsRefreshing(true);
-    let url = 'https://codemobiles.com/adhoc/youtubes/index_new.php';
-    let regUsername = 'admin'; // await AsyncStorage.getItem('username')
-    let regPassword = 'password'; // await AsyncStorage.getItem('password')
-    let data = `username=${regUsername}&password=${regPassword}&type=foods`;
-    let result = await axios.post<YoutubeResult>(url, data);
-    setDataArray(result.data.youtubes);
-    setIsRefreshing(false);
-  };
 
   const renderRow = (item: Youtube, index: any) => {
     
     return (
       <TouchableOpacity
         onPress={() => Alert.alert('Open Youtube')}
-        // onPress={async () => {
-        //   Platform.OS === 'android'
-        //     ? await YouTubeStandaloneAndroid.playVideo({
-        //         apiKey: 'YOUR_API_KEY', // Your YouTube Developer API Key
-        //         videoId: item.id, // YouTube video ID
-        //         autoplay: true, // Autoplay the video
-        //         startTime: 120, // Starting point of video (in seconds)
-        //       })
-        //     : : Linking.openURL(
-        //        `https://www.youtube.com/watch?v=${item.id}`,
-        //        ).catch(err => console.error("Couldn't load page", err));
-        // }}
+
         style={styles.listCard}>
         {/* Avatar and Title  */}
         <View style={styles.listCardView}>
           {/* Avatar  */}
-          <Image
-            style={styles.listAvatar}
-            source={{uri: dummyImg[index].url}}
-          />
+          <TouchableOpacity onPress={() => Alert.alert('Add activity')}>
+            <Image
+              style={styles.listAvatar}
+              source={{uri: dummyImg[index].url}}
+            />
+          </TouchableOpacity>
           {/* Title and Subtitle  */}
           <View style={styles.listTitleSubtitleContainer}>
             <Text style={styles.listTitle}>{item.title}</Text>
@@ -165,11 +144,11 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       {/* <Text>{route.params?.username}</Text> */}
       <FlatList
         // loading
-        refreshing={isRefreshing}
-        onRefresh={loadData}
+        refreshing={jsonfeedReducer.isFetching}
+        onRefresh={() => dispatch(jsonfeedActions.feedJSON())}
         // for header
         ListHeaderComponent={renderHeader}
-        data={dataArray}
+        data={jsonfeedReducer.result}
         renderItem={obj => renderRow(obj.item, obj.index)} // pass array Object
         keyExtractor={item => item.id}
       />

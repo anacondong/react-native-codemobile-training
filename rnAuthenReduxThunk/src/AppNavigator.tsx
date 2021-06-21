@@ -12,6 +12,7 @@ import JSONFeedScreen from './JSONFeedScreen';
 import CameraScreen from './CameraScreen';
 import { AS_AUTHEN_SUCCESS } from './Constants';
 import { Alert } from 'react-native';
+import ActivityScreen from './ActivityScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,6 +76,7 @@ const SuccessTab = () => {
     <Tab.Navigator initialRouteName="Json">
       <Tab.Screen name="Json" component={JSONFeedScreen} options={tab1} />
       <Tab.Screen name="Camera" component={CameraScreen} options={tab2} />
+      <Tab.Screen name="Activity" component={ActivityScreen} options={tab3} />
     </Tab.Navigator>
   );
 };
@@ -99,6 +101,24 @@ const tab1 = {
 
 const tab2 = {
   tabBarLabel: 'Camera',
+  tabBarIcon: ({focused}: any) => (
+    <Image
+      style={{
+        height: 28,
+        width: 28,
+      }}
+      resizeMode="contain"
+      source={
+        focused
+          ? require('./assets/img/ic_card_select.png')
+          : require('./assets/img/ic_card.png')
+      }
+    />
+  ),
+};
+
+const tab3 = {
+  tabBarLabel: 'Activity',
   tabBarIcon: ({focused}: any) => (
     <Image
       style={{
