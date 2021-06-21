@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import {
   View,
   Text,
@@ -13,6 +13,9 @@ import {Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList} from './RootNavigationParams';
+import AsyncStorage from '@react-native-community/async-storage';
+import {AS_AUTHEN_SUCCESS, AS_ACCOUNT} from './Constants';
+import { DongEntry } from './DongEntry';
 
 interface HomeScreenProps {}
 
@@ -24,6 +27,11 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const [account, setAccount] = useState<AccountProps>({
+    username: '',
+    password: '',
+  });
 
   React.useEffect(() => {
     console.log('Home created');
@@ -54,8 +62,22 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     });
   }, []);
 
-  const handleLogin = () => {
-    navigation.navigate('Success');
+  const handleLogin = async () => {
+    const regAccJson = await AsyncStorage.getItem(AS_ACCOUNT);
+    if (regAccJson) {
+      const regAcc: AccountProps = JSON.parse(regAccJson);
+      if (
+        account.username === regAcc.username &&
+        account.password === regAcc.password
+      ) {
+        await AsyncStorage.setItem(AS_AUTHEN_SUCCESS,'true')
+        navigation.dispatch(StackActions.replace('Success',{screen:'Json'}));
+      } else {
+        Alert.alert('Failed Login');
+      }
+    } else {
+      Alert.alert('Failed Login');
+    }
   };
 
   return (
@@ -73,25 +95,23 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           flexDirection: 'column',
         }}>
         {/* Username section */}
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Input
-            autoCapitalize="none"
-            placeholder="UserName"
-            leftIcon={{type: 'font-awesome', name: 'user'}}
-            onChangeText={() => {}}
-          />
-        </View>
+        <DongEntry
+          icon="user"
+          hint="user name"
+          onValueChanged={txt => {
+            setAccount({...account, username: txt});
+          }}
+        />
 
         {/* Password section */}
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Input
-            secureTextEntry
-            autoCapitalize="none"
-            placeholder="Password"
-            leftIcon={{type: 'font-awesome', name: 'lock'}}
-            onChangeText={() => {}}
-          />
-        </View>
+        <DongEntry
+          icon="lock"
+          hint="password"
+          onValueChanged={txt => {
+            setAccount({...account, password: txt});
+          }}
+          isPassword
+        />
 
         {/* Login Btn section */}
 

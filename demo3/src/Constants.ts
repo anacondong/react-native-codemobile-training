@@ -1,0 +1,2 @@
+export const AS_ACCOUNT = 'AS_ACCOUNT'
+export const AS_AUTHEN_SUCCESS = 'AS_AUTHEN_SUCCESS'

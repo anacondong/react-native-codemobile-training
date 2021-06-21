@@ -15,6 +15,8 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {DongEntry} from './DongEntry';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList} from './RootNavigationParams';
+import AsyncStorage from '@react-native-community/async-storage';
+import { AS_ACCOUNT } from './Constants';
 
 interface RegisterScreenProps {}
 
@@ -45,6 +47,11 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
     });
   }, []);
 
+  const handleRegister = async () => {
+    await AsyncStorage.setItem(AS_ACCOUNT,JSON.stringify(account));
+    navigation.goBack();
+    
+  }
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
@@ -88,9 +95,7 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
         {/* Register Btn section */}
         <Button
           title="Register"
-          onPress={() => {
-            console.log('Register');
-          }}
+          onPress={handleRegister}
         />
 
         <View style={{height: 16}}></View>
