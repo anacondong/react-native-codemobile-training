@@ -20,6 +20,7 @@ import {RootStackParamsList, RootTabParamsList} from './RootNavigationParams';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import * as jsonfeedActions from './actions/jsonfeed.action'
+import * as activityActions from './actions/activity.action'
 
 type JSONFeedScreenNavigationProps = CompositeNavigationProp<
   StackNavigationProp<RootStackParamsList, 'Success'>,
@@ -107,7 +108,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
         {/* Avatar and Title  */}
         <View style={styles.listCardView}>
           {/* Avatar  */}
-          <TouchableOpacity onPress={() => Alert.alert('Add activity')}>
+          <TouchableOpacity onPress={() => dispatch(activityActions.add(item.title))}>
             <Image
               style={styles.listAvatar}
               source={{uri: dummyImg[index].url}}
