@@ -26,49 +26,25 @@
             }
         }
 
-    .........
+    3.1.........
     signingConfig signingConfigs.release
     .........
 
 
-4. Subprojects setting
-----------------------------------
-Add this into  :  android/build.gradle
-
-
-
-subprojects {
-    afterEvaluate {project ->
-        if (project.hasProperty("android")) {
-            android {
-                compileSdkVersion 28     // have to match with build.gradle and app/build.gradle ones
-                buildToolsVersion '28.0.3'  // have to match with build.gradle and app/build.gradle ones
-                variantFilter { variant ->
-                    def names = variant.flavors*.name
-                    // To check for a certain build type, use variant.buildType.name == "<buildType>"
-                    if (names.contains("reactNative51") || names.contains("reactNative55") || names.contains("reactNative56")) {
-                        // Gradle ignores any variants that satisfy the conditions above.
-                        setIgnore(true)
-                    }
-                }
-            }
-        }
-    }
-}
-
+4.0 add 2 lines app/build.gradle
 missingDimensionStrategy 'react-native-camera', 'general'
 multiDexEnabled true
 
-4.1 AndroidX
-----------------------------------
-npm install jetifier
-npx jetify
 
 https://github.com/react-native-community/react-native-geolocation/issues/39
 
 5. Build
+./gradlew clean
 ./gradlew assembleRelease
  
+
+
+ =============================
 
  Make App Icon
  https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html

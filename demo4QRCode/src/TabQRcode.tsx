@@ -58,7 +58,7 @@ const TabQRcode: React.FunctionComponent<TabQRcodeProps> = props => {
           <MyQRCode
             color={value % 2 ? 'red' : 'green'}
             key={index}
-            value="testja"
+            value={qrValue}
           />
         ))}
       </ScrollView>
