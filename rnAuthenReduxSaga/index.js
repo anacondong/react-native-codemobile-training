@@ -9,17 +9,20 @@ import {name as appName} from './app.json';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
 import reducers from './src/reducers';
+import createSagaMiddleware from 'redux-saga';
+import * as rootSaga from './src/saga';
 // Redux End
-
-let middlewares = [thunk];
+const sagaMiddleware = createSagaMiddleware();
+let middlewares = [sagaMiddleware];
 
 if(__DEV__){
     middlewares.push(logger); // order by last of middlewares
 }
 
 const store = createStore(reducers, applyMiddleware(...middlewares));
+
+sagaMiddleware.run(rootSaga.watchAll);
 
 const ReduxApp = () => (
   <Provider store={store}>

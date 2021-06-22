@@ -19,9 +19,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList, RootTabParamsList} from './RootNavigationParams';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import * as jsonfeedActions from './actions/jsonfeed.action'
-import * as activityActions from './actions/activity.action'
 import { JsonfeedSelector } from './reducers/jsonfeed.reducer';
+import { ACTIVITY_ADD, JSON_REQUEST } from './Constants';
 
 
 type JSONFeedScreenNavigationProps = CompositeNavigationProp<
@@ -96,7 +95,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
   React.useEffect(() => {
     // component Created >> didmount
     console.log('Json created');
-    dispatch(jsonfeedActions.feedJSON()); // call action function
+    dispatch({type: JSON_REQUEST}); // call to action then Saga Watcher will get it
   }, []);
 
 
@@ -110,7 +109,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
         {/* Avatar and Title  */}
         <View style={styles.listCardView}>
           {/* Avatar  */}
-          <TouchableOpacity onPress={() => dispatch(activityActions.add(item.title))}>
+          <TouchableOpacity onPress={() => dispatch({type: ACTIVITY_ADD, payload : item.title})}>
             <Image
               style={styles.listAvatar}
               source={{uri: dummyImg[index].url}}
@@ -148,7 +147,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       <FlatList
         // loading
         refreshing={jsonfeedReducer.isFetching}
-        onRefresh={() => dispatch(jsonfeedActions.feedJSON())}
+        onRefresh={() => dispatch({type: JSON_REQUEST})}
         // for header
         ListHeaderComponent={renderHeader}
         data={jsonfeedReducer.result}

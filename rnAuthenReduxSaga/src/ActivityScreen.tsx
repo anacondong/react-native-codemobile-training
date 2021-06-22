@@ -2,7 +2,7 @@
 import React from 'react';
 import {Button, ScrollView, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import * as activityActions from './actions/activity.action';
+import { ACTIVITY_CLEAR } from './Constants';
 import { ActivitySelector } from './reducers/activity.reducer';
 
 interface ActivityScreenProps {}
@@ -24,7 +24,7 @@ const ActivityScreen: React.FunctionComponent<ActivityScreenProps> = props => {
           ))}
         </View>
       </ScrollView>
-      <Button title="Clear" onPress={() => dispatch(activityActions.clear())} />
+      <Button title="Clear" onPress={() => dispatch({type: ACTIVITY_CLEAR})} />
     </View>
   );
 };
