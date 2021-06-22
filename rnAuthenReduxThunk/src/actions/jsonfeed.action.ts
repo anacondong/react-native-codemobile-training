@@ -2,18 +2,19 @@ import { ACTIVITY_ADD, JSON_FAILED, JSON_FETCHING, JSON_SUCCESS } from "../Const
 
 import axios from 'axios';
 import { YoutubeResult } from "../types/youtube.interface";
+import { JsonFailed, JsonFetching, JsonSuccess } from "../types/jsonfeed-action.interface";
 
 // Called by reducer
-const setJSONToFetching = () => ({
+const setJSONToFetching = (): JsonFetching => ({
     type: JSON_FETCHING,
 })
 
-const setJSONToSuccess = (payload:any) => ({
+const setJSONToSuccess = (payload:any): JsonSuccess => ({
     type: JSON_SUCCESS,
     payload
 })
 
-const setJSONToFailed = (error:string) => ({
+const setJSONToFailed = (error:string): JsonFailed => ({
     type: JSON_FAILED,
     error
 })

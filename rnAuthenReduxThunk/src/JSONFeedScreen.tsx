@@ -21,6 +21,8 @@ import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import * as jsonfeedActions from './actions/jsonfeed.action'
 import * as activityActions from './actions/activity.action'
+import { JsonfeedSelector } from './reducers/jsonfeed.reducer';
+
 
 type JSONFeedScreenNavigationProps = CompositeNavigationProp<
   StackNavigationProp<RootStackParamsList, 'Success'>,
@@ -31,7 +33,7 @@ interface JSONFeedScreenProps {}
 const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
   const navigation = useNavigation<JSONFeedScreenNavigationProps>();
   const route = useRoute<RouteProp<RootStackParamsList, 'Success'>>();
-  const jsonfeedReducer = useSelector(state => state.jsonfeedReducer);
+  const jsonfeedReducer = useSelector(JsonfeedSelector);
   const dummyImg = [
     {
       url: 'https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/204156627_192665129325543_2208976459849398308_n.jpg?tp=1&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=103&_nc_ohc=SZC7cGhTRskAX_UMmLX&edm=AP_V10EBAAAA&ccb=7-4&oh=03e76db13604fba9c9fe8e1c540a9541&oe=60D6FB83&_nc_sid=4f375e',

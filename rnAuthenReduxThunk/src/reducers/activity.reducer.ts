@@ -1,10 +1,15 @@
+import { RootReduces } from '.';
 import {ACTIVITY_ADD, ACTIVITY_CLEAR} from '../Constants';
 
-const initialState = {
+export interface ActivityState {
+  data: any;
+}
+
+const initialState: ActivityState = {
   data: [],
 };
 
-export default (state = initialState, action:any) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
     case ACTIVITY_ADD:
       return {...state, data: [...state.data, action.payload]};
@@ -15,3 +20,5 @@ export default (state = initialState, action:any) => {
       return state;
   }
 };
+
+export const ActivitySelector = (state: RootReduces) => state.activityReducer;
