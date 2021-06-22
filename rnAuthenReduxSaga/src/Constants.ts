@@ -1,0 +1,10 @@
+export const AS_ACCOUNT = 'AS_ACCOUNT'
+export const AS_AUTHEN_SUCCESS = 'AS_AUTHEN_SUCCESS'
+
+export const JSON_FETCHING = 'JSON_FETCHING';
+export const JSON_SUCCESS = 'JSON_SUCCESS';
+export const JSON_FAILED = 'JSON_FAILED';
+
+export const ACTIVITY_ADD = 'ACTIVITY_ADD';
+export const ACTIVITY_CLEAR = 'ACTIVITY_CLEAR';
+
