@@ -19,11 +19,11 @@ export const setJSONToFailed = (error:string): JsonFailed => ({
     error
 })
 
-export const doFeedJSON = async () => {
+export const doFeedJSON = async (filter: string = 'foods') => {
     let url = 'https://codemobiles.com/adhoc/youtubes/index_new.php';
     let regUsername = 'admin'; // await AsyncStorage.getItem('username')
     let regPassword = 'password'; // await AsyncStorage.getItem('password')
-    let data = `username=${regUsername}&password=${regPassword}&type=foods`;
+    let data = `username=${regUsername}&password=${regPassword}&type=${filter}`;
     return axios.post<YoutubeResult>(url, data);
 };
 

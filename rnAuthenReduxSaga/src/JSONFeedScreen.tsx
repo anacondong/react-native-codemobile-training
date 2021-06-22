@@ -151,7 +151,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
         // for header
         ListHeaderComponent={renderHeader}
         data={jsonfeedReducer.result}
-        renderItem={obj => renderRow(obj.item, obj.index)} // pass array Object
+          renderItem={obj => renderRow(obj.item, obj.index)} // pass array Object
         keyExtractor={item => item.id}
       />
     </ImageBackground>
