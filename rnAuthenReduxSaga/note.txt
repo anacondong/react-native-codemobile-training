@@ -53,8 +53,8 @@ Variables (3 types)
     npx react-native link react-native-reanimated
     npx react-native link react-native-screens
     npx react-native link react-native-safe-area-context
-    npx react-native link @react-native-community/masked-view      
-    npx react-native link @react-native-community/async-storage    
+    npx react-native link @react-native-community/masked-view
+    npx react-native link @react-native-community/async-storage   
     npx react-native link react-native-permissions
 
     ยังเพิ่งลงชุดนี้
@@ -127,7 +127,7 @@ npx react-native link react-native-permissions
 
 
 ### Redux Thunk
-yarn add redux react-redux redux-logger redux-thunk
+yarn add redux react-redux redux-logger redux-thunk redux-saga
 
 actions
   action function >> thunk (dispatch ...) call back function

@@ -1,0 +1,12 @@
+### Test1
+GET http://localhost:3000 HTTP/1.1
+
+
+### Test2 
+POST http://localhost:3000/auth HTTP/1.1
+Content-Type: application/json
+
+{
+"username": "admin",
+"password" : "admin"
+}
