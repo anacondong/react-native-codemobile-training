@@ -1,22 +1,23 @@
-const express = require('express');
-const app = express();
+const express = require('express'); // Include ExpressJS
+const app = express(); // Create an ExpressJS app
+const bodyParser = require('body-parser'); // Middleware
 
-app.use(express.json())
-
+app.use(bodyParser.json())
 app.get('/', (req, res) => {
-  res.json({result: 'ok'});
+  res.json({ result: 'ok' });
 });
 
-app.post('/auth', function(request, response) {
-  response.json({user:{}});
-});
+app.post('/login', (req, res) => {
+  // Insert Login Code Here
+  console.log('req', req);
+  let username = req.body.username;
+  let password = req.body.password;
+  if (username === "admin" && password === "admin") {
+    res.json({ user: { username: "admin", email: "admin@gmail.com", role: "admin and God" } });
+  } else {
+    res.json({ user: null });
+  }
 
-app.post('/auth/admin', function(request, response) {
-  response.json({user:{username:"admin",email:"admin@gmail.com",role:"admin and God"}});
-});
-
-app.post('/auth/q', function(request, response) {
-  response.json({user:{}});
 });
 
 app.listen(3000, () => {
