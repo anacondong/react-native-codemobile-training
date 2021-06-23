@@ -7,6 +7,7 @@ import {
   PieChart,
   ProgressChart,
 } from 'react-native-chart-kit';
+import {ifIphoneX} from 'react-native-iphone-x-helper';
 
 interface AppProps {}
 
@@ -194,7 +195,12 @@ const App: React.FunctionComponent<AppProps> = props => {
   };
 
   return (
-    <View style={{flex: 1, padding: 10}}>
+    <View
+      style={{
+        flex: 1,
+        padding: 10,
+        ...ifIphoneX({marginTop: 30}, {marginTop: 0}),
+      }}>
       <ScrollView
         contentContainerStyle={{
           flexDirection: 'column',

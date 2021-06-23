@@ -12,7 +12,6 @@ target 'demo5Chart' do
     :hermes_enabled => false
   )
 
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
   target 'demo5ChartTests' do
     inherit! :complete
