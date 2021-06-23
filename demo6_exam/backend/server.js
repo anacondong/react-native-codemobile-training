@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   // Insert Login Code Here
-  console.log('req', req);
+  console.log('req', req.body);
   let username = req.body.username;
   let password = req.body.password;
   if (username === "admin" && password === "admin") {

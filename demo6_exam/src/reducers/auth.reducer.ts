@@ -1,4 +1,4 @@
-import {RootReduces} from '.';
+import { RootReduces } from '.';
 import {
   AUTH_REQUEST,
   AUTH_CLEAR,
@@ -29,13 +29,13 @@ const initialState: AuthState = {
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case AUTH_REQUEST:
-      return {...state, user: null};
+      return { ...state, user: null };
     case AUTH_SUCCESS:
-      return {...state, user: action.payload, error:null};
+      return { ...state, user: action.payload, error: null };
     case AUTH_CLEAR:
-      return {...state, user: null, error: null};
+      return { ...state, user: null, error: null };
     case AUTH_FAILED:
-      return {...state, user: null, error: 'Login Failed !!'};
+      return { ...state, user: null, error: 'Login Failed !!' };
 
     default:
       return state;

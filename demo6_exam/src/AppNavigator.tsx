@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './HomeScreen';
 import RegisterScreen from './RegisterScreen';
@@ -23,7 +23,7 @@ const RootStack = (props: any) => {
         backgroundColor: '#119CED',
       },
       headerTintColor: '#FFFFFF',
-      headerTitleStyle: {color: '#fff'},
+      headerTitleStyle: { color: '#fff' },
       headerRight: () => (
         <TouchableOpacity
           activeOpacity={0.7}
@@ -31,7 +31,7 @@ const RootStack = (props: any) => {
             props.onLogout();
             Alert.alert('Logout');
           }}
-          style={{padding: 10}}>
+          style={{ padding: 10 }}>
           <Icon
             name="sign-out"
             size={20}
@@ -45,7 +45,7 @@ const RootStack = (props: any) => {
       ),
     };
   };
-  
+
   return ( // pre login
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -56,7 +56,7 @@ const RootStack = (props: any) => {
         options={successTabOption(props)}
       />
     </Stack.Navigator>
-  ) 
+  )
 };
 
 const SuccessTab = () => {
@@ -70,7 +70,7 @@ const SuccessTab = () => {
 
 const tab1 = {
   tabBarLabel: 'JSON',
-  tabBarIcon: ({focused}: any) => (
+  tabBarIcon: ({ focused }: any) => (
     <Image
       style={{
         height: 28,
@@ -88,7 +88,7 @@ const tab1 = {
 
 const tab2 = {
   tabBarLabel: 'Activity',
-  tabBarIcon: ({focused}: any) => (
+  tabBarIcon: ({ focused }: any) => (
     <Image
       style={{
         height: 28,

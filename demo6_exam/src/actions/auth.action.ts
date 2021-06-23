@@ -21,5 +21,5 @@ export const setAuthFailed = () => ({
 });
 
 export const doAuthServer = async (payload: any) => {
-    return axios.post('http://192.168.2.36:3000/auth/' + payload.username);
+    return axios.post('http://192.168.2.36:3000/login', { username: payload.username, password: payload.password });
 };
