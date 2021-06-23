@@ -8,14 +8,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/auth', function(request, response) {
-  console.log('auth');
-	const username = request.body.username;
-	const password = request.body.password;
-	if (username === "admin" && password === "admin") {
-		response.json({username:"admin",email:"admin@gmail.com",role:"admin and God"});
-	} else {
-		response.json({result: 'OMG That is wrong !!'});
-	}
+  response.json({user:{username:"admin",email:"admin@gmail.com",role:"admin and God"}});
 });
 
 app.listen(3000, () => {

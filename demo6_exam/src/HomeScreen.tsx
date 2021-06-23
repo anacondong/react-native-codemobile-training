@@ -1,4 +1,3 @@
-import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation, StackActions} from '@react-navigation/native';
@@ -16,6 +15,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamsList} from './RootNavigationParams';
 import {DongEntry} from './DongEntry';
 import { AUTH_LOGIN_REQUEST } from './constants/Constants';
+import { AuthSelector } from './reducers/auth.reducer';
 
 interface HomeScreenProps {}
 
@@ -33,6 +33,8 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
     password: '',
   });
 
+  const authReducer = useSelector(AuthSelector);
+
   React.useEffect(() => {
     console.log('Home created');
     navigation.setOptions({
@@ -48,7 +50,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
   const handleLogin = async () => {
     const loginUser = dispatch({type: AUTH_LOGIN_REQUEST, payload : {username:account.username,password:account.password}})
-    console.log('loginUser >> ',loginUser);
 
     // navigation.dispatch(StackActions.replace('Success', {screen: 'Json',username: account.username}));
 
@@ -59,14 +60,13 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
       source={require('./assets/img/gradient_bg.png')}
       style={{flex: 1}}>
       {/* authen section */}
-
+      <Text>{authReducer.user.username}</Text>
       {/* Banner  */}
       <Image
         source={require('./assets/img/header_react_native.png')}
         style={{height: 100, width: '100%', marginTop: 10}}
         resizeMode="contain"
       />
-
       <View
         style={{
           padding: 25,
