@@ -12,6 +12,5 @@ export function* watchAll() {
     yield all([takeEvery(actionTypes.ACTIVITY_CLEAR_REQUEST, clearActivitySaga)]);
 
     yield all([takeEvery(actionTypes.AUTH_LOGIN_REQUEST, setAuthLoginSaga)]);
-    yield all([takeEvery(actionTypes.AUTH_LOGOUT_REQUEST, setAuthLogoutSaga)]);
 }
 

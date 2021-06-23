@@ -8,7 +8,15 @@ app.get('/', (req, res) => {
 });
 
 app.post('/auth', function(request, response) {
+  response.json({user:{}});
+});
+
+app.post('/auth/admin', function(request, response) {
   response.json({user:{username:"admin",email:"admin@gmail.com",role:"admin and God"}});
+});
+
+app.post('/auth/q', function(request, response) {
+  response.json({user:{}});
 });
 
 app.listen(3000, () => {

@@ -1,9 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { AUTH_ADD, AUTH_CLEAR } from './../constants/Constants';
+import { AUTH_REQUEST, AUTH_CLEAR, AUTH_FAILED, AUTH_SUCCESS } from './../constants/Constants';
 import axios from 'axios';
 
 export const setAuthLogin = (payload: any) => ({
-    type: AUTH_ADD,
+    type: AUTH_REQUEST,
+    payload,
+});
+
+export const setAuthSuccess = (payload: any) => ({
+    type: AUTH_SUCCESS,
     payload,
 });
 
@@ -11,8 +16,10 @@ export const setAuthLogout = () => ({
     type: AUTH_CLEAR,
 });
 
-export const doAuthServer = async (payload:any) => {
+export const setAuthFailed = () => ({
+    type: AUTH_FAILED,
+});
 
-    let data = `username=${payload.username}&password=${payload.password}`;
-    return axios.post('http://192.168.2.41:3000/auth', data);
+export const doAuthServer = async (payload:any) => {
+    return axios.post('http://192.168.2.41:3000/auth/'+payload.username);
 };

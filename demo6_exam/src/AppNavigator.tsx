@@ -57,15 +57,6 @@ const RootStack = (props: any) => {
       />
     </Stack.Navigator>
   ) 
-  // : ( // post login
-  //   <Stack.Navigator initialRouteName="Success">
-  //     <Stack.Screen
-  //       name="Success"
-  //       component={SuccessTab}
-  //       options={successTabOption(props)}
-  //     />
-  //   </Stack.Navigator>
-  // );
 };
 
 const SuccessTab = () => {

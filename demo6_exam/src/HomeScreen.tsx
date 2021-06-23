@@ -36,7 +36,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   const authReducer = useSelector(AuthSelector);
 
   React.useEffect(() => {
-    console.log('Home created');
     navigation.setOptions({
       title: 'Home',
       headerStyle: {
@@ -49,8 +48,8 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   }, []);
 
   const handleLogin = async () => {
-    const loginUser = dispatch({type: AUTH_LOGIN_REQUEST, payload : {username:account.username,password:account.password}})
-
+    dispatch({type: AUTH_LOGIN_REQUEST, payload : {username:account.username,password:account.password}})
+    navigation.dispatch(StackActions.replace('Success',{screen:'Json'}));
     // navigation.dispatch(StackActions.replace('Success', {screen: 'Json',username: account.username}));
 
   };
@@ -60,7 +59,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
       source={require('./assets/img/gradient_bg.png')}
       style={{flex: 1}}>
       {/* authen section */}
-      <Text>{authReducer.user.username}</Text>
       {/* Banner  */}
       <Image
         source={require('./assets/img/header_react_native.png')}
@@ -93,6 +91,8 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           }}
           isPassword
         />
+
+        {<Text>{authReducer.error}</Text>}
 
         {/* Login Btn section */}
 
