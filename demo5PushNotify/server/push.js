@@ -1,17 +1,15 @@
 // yarn add onesignal-node
 const OneSignal = require('onesignal-node');
-const client = new OneSignal.Client(
-  'e522b740-cd0e-4a72-bfb8-0a505ffc4199',
-  'N2U3YWQyNDgtMzU1NS00YmI5LWIxMjYtYTEwMGNjODA5YjJh',
-);
+const client = new OneSignal.Client('app_id', 'rest_api');
 
 // See all fields: https://documentation.onesignal.com/reference/create-notification
 const notification = {
   contents: {
+    tr: 'Yeni bildirim',
     en: 'New notification',
   },
   included_segments: ['Subscribed Users'],
-  // filters: [{field: 'tag', key: 'level', relation: '>', value: 10}],
+  filters: [{field: 'tag', key: 'level', relation: '>', value: 10}],
 };
 
 // or you can use promise style:

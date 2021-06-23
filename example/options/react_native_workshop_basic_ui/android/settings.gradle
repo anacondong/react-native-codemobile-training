@@ -1,0 +1,3 @@
+rootProject.name = 'react_native_workshop_basic_ui'
+
+include ':app'

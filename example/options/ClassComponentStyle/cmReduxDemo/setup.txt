@@ -1,0 +1,31 @@
+Benefits of redux
+ 1. Unit Test
+ 2. Share states and actions
+ 3. Apply Middleware (Notofication, Logger)
+ 4. Data Flow (Unidirection Data Flow)
+
+
+1.  npm i redux react-redux redux-logger redux-thunk
+2. create folders
+   - src
+     + actions
+     + components
+     + reducers
+3. create Home component (presentation component)
+4. create constants.js
+5. rxaction in home.action.js 
+    - setStateToXXXXX (Forward to Redux)
+    - component Calling Function (Called by Components, ex: feed)
+6. rxreduxcer in home.reducer.js
+7  index.js in reducers folder (combineReducers(....))
+8. copy store.js
+9. Apply Provider component to cover App component in index.js
+10. The Redux Linking : rxmap to generate 
+   - mapStateToProps
+   - mapDispatchToProps
+   - connect(mapStateToProps, mapDispatchToProps)(ComponentName)
+11. Usage
+   - Calling dispatch ex: this.props.feed, this.props.reset
+   - Caling reducer ex: this.props.homeReducer.result
+
+     

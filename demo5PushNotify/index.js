@@ -11,7 +11,7 @@ AppRegistry.registerComponent(appName, () => App);
 
 //OneSignal Init Code
 OneSignal.setLogLevel(6, 0);
-OneSignal.setAppId("e522b740-cd0e-4a72-bfb8-0a505ffc4199");
+OneSignal.setAppId(""); // appID
 //END OneSignal Init Code
 
 //Prompt for push on iOS

@@ -1,0 +1,2 @@
+yarn add react-native-chart-kit react-native-svg
+npx react-native link react-native-svg

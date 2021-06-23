@@ -1,0 +1,41 @@
+{
+  "name": "myRnAll",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.5.0",
+    "react-native": "0.57.2",
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "formidable": "^1.2.1",
+    "react-native-elements": "^1.0.0-beta5",
+    "react-native-image-crop-picker": "^0.21.2",
+    "react-native-scroll-into-view": "^0.1.4",
+    "react-native-vector-icons": "^6.0.1",
+    "react-native-youtube": "^1.1.0",
+    "react-navigation": "^3.0.0",
+    "react-native-gesture-handler": "^1.0.9",
+    "react-native-barcode-builder": "^1.0.5",
+    "react-native-camera": "^1.2.0",
+    "react-native-iphone-x-helper": "^1.2.0",
+    "react-native-qrcode-scanner": "^1.1.0",
+    "react-native-qrcode-svg": "^5.1.1",
+    "react-native-svg": "^8.0.8",
+    "react-native-maps": "^0.22.0",
+    "react-native-open-maps": "^0.3.2",
+    "react-native-segmented-control-tab": "^3.3.1"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.48.0",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
