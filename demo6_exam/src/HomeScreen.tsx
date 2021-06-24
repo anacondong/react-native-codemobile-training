@@ -1,5 +1,5 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import {
   View,
@@ -13,9 +13,12 @@ import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamsList } from './RootNavigationParams';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthSelector } from './reducers/auth.reducer';
+import { AS_AUTHEN_SUCCESS, AS_ACCOUNT } from './Constants';
 import { DongEntry } from './DongEntry';
 import { AUTH_LOGIN_REQUEST } from './constants/Constants';
-import { AuthSelector } from './reducers/auth.reducer';
 
 interface HomeScreenProps { }
 
@@ -27,13 +30,15 @@ type HomeScreenNavigationProp = StackNavigationProp<
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const dispatch = useDispatch();
+
   const [account, setAccount] = useState<AccountProps>({
     username: '',
     password: '',
   });
 
+  const dispatch = useDispatch();
   const authReducer = useSelector(AuthSelector);
+
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -43,30 +48,45 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
       },
       headerTintColor: '#FFFFFF',
       headerTitleStyle: { color: '#fff' },
-      headerBackTitle: '',
+      headerBackTitle: ' ',
     });
+  }, []);
 
-    if (authReducer.user !== null && authReducer.user.username !== '') {
-      navigation.dispatch(StackActions.replace('Success', { screen: 'Json' }));
-    }
-
-  }, [authReducer]);
 
   const handleLogin = async () => {
+
     dispatch({ type: AUTH_LOGIN_REQUEST, payload: { username: account.username, password: account.password } })
+    const regAccJson = await AsyncStorage.getItem(AS_ACCOUNT);
+    if (regAccJson) {
+      const regAcc: AccountProps = JSON.parse(regAccJson);
+      if (
+        account.username === regAcc.username &&
+        account.password === regAcc.password
+      ) {
+        await AsyncStorage.setItem(AS_AUTHEN_SUCCESS, 'true')
+        navigation.dispatch(StackActions.replace('Success', { screen: 'Json' }));
+      } else {
+        Alert.alert('Failed Login');
+      }
+    } else {
+      Alert.alert('Failed Login');
+    }
   };
 
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
       style={{ flex: 1 }}>
-      {/* authen section */}
+
       {/* Banner  */}
       <Image
         source={require('./assets/img/header_react_native.png')}
-        style={{ height: 100, width: '100%', marginTop: 10 }}
+        style={{ height: 100, width: '100%' }}
         resizeMode="contain"
       />
+
+
+      {/* authen section */}
       <View
         style={{
           padding: 25,
@@ -94,8 +114,6 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           isPassword
         />
 
-        {<Text>{authReducer.error}</Text>}
-
         {/* Login Btn section */}
 
         <Button title="Login" onPress={handleLogin} />
@@ -105,7 +123,9 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() =>
-            navigation.navigate('Register')
+            navigation.navigate('Register', {
+              dummy: 'Dummy value pass by route ',
+            })
           }>
           <Text style={{ textAlign: 'center' }}>Register</Text>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -12,15 +12,15 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
-import {Youtube, YoutubeResult} from './types/youtube.interface';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {CompositeNavigationProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamsList, RootTabParamsList} from './RootNavigationParams';
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import { Youtube, YoutubeResult } from './types/youtube.interface';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { CompositeNavigationProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamsList, RootTabParamsList } from './RootNavigationParams';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { JsonfeedSelector } from './reducers/jsonfeed.reducer';
-import { ACTIVITY_ADD, JSON_REQUEST } from './constants/Constants';
+import { ACTIVITY_ADD, JSON_REQUEST } from './Constants';
 
 
 type JSONFeedScreenNavigationProps = CompositeNavigationProp<
@@ -28,7 +28,7 @@ type JSONFeedScreenNavigationProps = CompositeNavigationProp<
   BottomTabNavigationProp<RootTabParamsList, 'Json'>
 >;
 
-interface JSONFeedScreenProps {}
+interface JSONFeedScreenProps { }
 const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
   const navigation = useNavigation<JSONFeedScreenNavigationProps>();
   const route = useRoute<RouteProp<RootStackParamsList, 'Success'>>();
@@ -40,25 +40,24 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
   React.useEffect(() => {
     // component Created >> didmount
     console.log('Json created');
-    dispatch({type: JSON_REQUEST}); // call to action then Saga Watcher will get it
+    dispatch({ type: JSON_REQUEST }); // call to action then Saga Watcher will get it
   }, []);
 
 
   const renderRow = (item: Youtube, index: any) => {
-    
+
     return (
       <TouchableOpacity
         onPress={() => Alert.alert('Open Youtube')}
 
         style={styles.listCard}>
         {/* Avatar and Title  */}
-        <View style={styles.listCardView} >
+        <View style={styles.listCardView}>
           {/* Avatar  */}
-          <TouchableOpacity onPress={() => dispatch({type: ACTIVITY_ADD, payload : item.title})}>
+          <TouchableOpacity onPress={() => dispatch({ type: ACTIVITY_ADD, payload: item.title })}>
             <Image
               style={styles.listAvatar}
-              source={{uri: dummyImg}}
-              
+              source={{ uri: dummyImg }}
             />
           </TouchableOpacity>
           {/* Title and Subtitle  */}
@@ -70,7 +69,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
 
         <Image
           style={styles.listYoutbeImage}
-          source={{uri: dummyImg}}
+          source={{ uri: dummyImg }}
         />
       </TouchableOpacity>
     );
@@ -85,10 +84,10 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       <FlatList
         // loading
         refreshing={jsonfeedReducer.isFetching}
-        onRefresh={() => dispatch({type: JSON_REQUEST})}
-        
+        onRefresh={() => dispatch({ type: JSON_REQUEST })}
+        // for header  ListHeaderComponent={renderHeader}
         data={jsonfeedReducer.result}
-          renderItem={obj => renderRow(obj.item, obj.index)} // pass array Object
+        renderItem={obj => renderRow(obj.item, obj.index)} // pass array Object
         keyExtractor={item => item.id}
       />
     </ImageBackground>

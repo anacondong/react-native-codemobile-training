@@ -2,7 +2,7 @@
 import React from 'react';
 import {Button, ScrollView, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import { ACTIVITY_CLEAR } from './constants/Constants';
+import { ACTIVITY_CLEAR } from './Constants';
 import { ActivitySelector } from './reducers/activity.reducer';
 
 interface ActivityScreenProps {}

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import {
   View,
   Text,
@@ -9,15 +9,16 @@ import {
   Image,
 } from 'react-native';
 
-import {Button} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {DongEntry} from './DongEntry';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamsList} from './RootNavigationParams';
-import {AS_ACCOUNT} from './constants/Constants';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { DongEntry } from './DongEntry';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamsList } from './RootNavigationParams';
+import AsyncStorage from '@react-native-community/async-storage';
+import { AS_ACCOUNT } from './Constants';
 
-interface RegisterScreenProps {}
+interface RegisterScreenProps { }
 
 // define Stack Navigation, Put ID it's self
 type RegisterScreenNavigationProps = StackNavigationProp<
@@ -29,7 +30,7 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
   // let count = 0; // no side effect on Render
   const navigation = useNavigation<RegisterScreenNavigationProps>();
 
-  const [account, setAccount] = useState({username: '', password: ''});
+  const [account, setAccount] = useState({ username: '', password: '' });
 
   const route = useRoute<RouteProp<RootStackParamsList, 'Register'>>();
 
@@ -41,27 +42,28 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
         backgroundColor: '#119CED',
       },
       headerTintColor: '#FFFFFF',
-      headerTitleStyle: {color: '#fff'},
+      headerTitleStyle: { color: '#fff' },
       headerBackTitle: ' ',
     });
   }, []);
 
   const handleRegister = async () => {
+    await AsyncStorage.setItem(AS_ACCOUNT, JSON.stringify(account));
     navigation.goBack();
-  };
+
+  }
   return (
     <ImageBackground
       source={require('./assets/img/gradient_bg.png')}
-      style={{flex: 1}}>
-      {/* authen section */}
-
+      style={{ flex: 1 }}>
       {/* Banner  */}
       <Image
         source={require('./assets/img/header_react_native.png')}
-        style={{height: 100, width: '100%', marginTop: 10}}
+        style={{ height: 100, width: '100%' }}
         resizeMode="contain"
       />
 
+      {/* authen section */}
       <View
         style={{
           padding: 25,
@@ -75,34 +77,44 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
           icon="user"
           hint="user name"
           onValueChanged={txt => {
-            setAccount({...account, username: txt});
+            setAccount({ ...account, username: txt });
           }}
         />
 
-        <View style={{height: 16}}></View>
+        <View style={{ height: 16 }}></View>
 
         {/* Password section */}
         <DongEntry
           icon="lock"
           hint="password"
           onValueChanged={txt => {
-            setAccount({...account, password: txt});
+            setAccount({ ...account, password: txt });
           }}
           isPassword
         />
-        <View style={{height: 16}}></View>
 
         {/* Register Btn section */}
-        <Button title="Register" onPress={handleRegister} />
+        <Button
+          title="Register"
+          onPress={handleRegister}
+        />
 
-        <View style={{height: 16}}></View>
+        <View style={{ height: 16 }}></View>
 
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => navigation.goBack()}>
-          <Text style={{textAlign: 'center'}}>Cancel</Text>
-        </TouchableOpacity>
+        <Button
+          type="outline"
+          title="Cancel"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+
+        {/* <TouchableOpacity activeOpacity={0.5}>
+            <Text style={{textAlign:'center'}}>Cancel</Text>
+        </TouchableOpacity> */}
       </View>
+
+
     </ImageBackground>
   );
 };

@@ -13,6 +13,7 @@ export interface AuthState {
     email: string;
     role: string;
   };
+  isAuth: boolean,
   error: string;
 }
 
@@ -23,6 +24,7 @@ const initialState: AuthState = {
     email: '',
     role: '',
   },
+  isAuth: false,
   error: '',
 };
 
@@ -31,11 +33,11 @@ export default (state = initialState, action: any) => {
     case AUTH_REQUEST:
       return { ...state, user: null };
     case AUTH_SUCCESS:
-      return { ...state, user: action.payload, error: null };
+      return { ...state, user: action.payload, error: null, isAuth: true };
     case AUTH_CLEAR:
-      return { ...state, user: null, error: null };
+      return { ...state, user: null, error: null, isAuth: false };
     case AUTH_FAILED:
-      return { ...state, user: null, error: 'Login Failed !!' };
+      return { ...state, user: null, error: 'Login Failed !!', isAuth: false };
 
     default:
       return state;
