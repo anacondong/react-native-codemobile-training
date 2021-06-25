@@ -14,9 +14,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { DongEntry } from './DongEntry';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamsList } from './RootNavigationParams';
 import AsyncStorage from '@react-native-community/async-storage';
 import { AS_ACCOUNT } from './Constants';
+import { REGISTER_REQUEST } from './constants/Constants';
 
 interface RegisterScreenProps { }
 
@@ -34,6 +36,8 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
 
   const route = useRoute<RouteProp<RootStackParamsList, 'Register'>>();
 
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     console.log('Register created');
     navigation.setOptions({
@@ -48,6 +52,8 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
   }, []);
 
   const handleRegister = async () => {
+
+    dispatch({ type: REGISTER_REQUEST, payload: { username: account.username, password: account.password } })
     await AsyncStorage.setItem(AS_ACCOUNT, JSON.stringify(account));
     navigation.goBack();
 

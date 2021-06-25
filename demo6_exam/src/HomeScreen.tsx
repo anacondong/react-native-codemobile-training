@@ -55,7 +55,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
   const handleLogin = async () => {
 
-    dispatch({ type: AUTH_LOGIN_REQUEST, payload: { username: account.username, password: account.password } })
+    // dispatch({ type: AUTH_LOGIN_REQUEST, payload: { username: account.username, password: account.password } })
     const regAccJson = await AsyncStorage.getItem(AS_ACCOUNT);
     if (regAccJson) {
       const regAcc: AccountProps = JSON.parse(regAccJson);

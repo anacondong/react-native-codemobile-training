@@ -1,7 +1,7 @@
 import * as actions from '../actions/auth.action';
 import { put, call, delay } from 'redux-saga/effects';
 
-export function* setAuthLoginSaga({ type, payload }) {
+export function* authLoginWorker({ type, payload }) {
 
   try {
     const response = yield call(actions.doAuthServer, payload);
@@ -16,6 +16,6 @@ export function* setAuthLoginSaga({ type, payload }) {
   }
 }
 
-export function* setAuthLogoutSaga() {
-  yield put(actions.setAuthLogout());
+export function* authLogoutWorker() {
+  yield put(actions.setAuthFailed());
 }

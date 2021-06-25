@@ -1,7 +1,6 @@
 import { RootReduces } from '.';
 import {
   AUTH_REQUEST,
-  AUTH_CLEAR,
   AUTH_FAILED,
   AUTH_SUCCESS,
 } from '../constants/Constants';
@@ -34,8 +33,6 @@ export default (state = initialState, action: any) => {
       return { ...state, user: null };
     case AUTH_SUCCESS:
       return { ...state, user: action.payload, error: null, isAuth: true };
-    case AUTH_CLEAR:
-      return { ...state, user: null, error: null, isAuth: false };
     case AUTH_FAILED:
       return { ...state, user: null, error: 'Login Failed !!', isAuth: false };
 
