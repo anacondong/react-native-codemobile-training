@@ -5,8 +5,8 @@ export function* authLoginWorker({ type, payload }) {
 
   try {
     const response = yield call(actions.doAuthServer, payload);
-    console.log('response', response);
-    if (response.data.user !== null) {
+    console.log('authLoginWorker response', response);
+    if (response.data.user) {
       yield put(actions.setAuthSuccess(response.data.user));
     } else {
       yield put(actions.setAuthFailed());

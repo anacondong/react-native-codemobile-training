@@ -14,6 +14,7 @@ export interface AuthState {
     role: string;
   };
   isAuth: boolean,
+  isReady: boolean,
   error: string;
 }
 
@@ -25,17 +26,18 @@ const initialState: AuthState = {
     role: '',
   },
   isAuth: false,
+  isReady: true,
   error: '',
 };
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case AUTH_REQUEST:
-      return { ...state, user: null };
+      return { ...state, user: null, isReady: false };
     case AUTH_SUCCESS:
-      return { ...state, user: action.payload, error: null, isAuth: true };
+      return { ...state, user: action.payload, error: null, isAuth: true, isReady: true };
     case AUTH_FAILED:
-      return { ...state, user: null, error: 'Login Failed !!', isAuth: false };
+      return { ...state, user: null, error: 'Login Failed !!', isAuth: false, isReady: true };
     case AUTH_LOGOUT:
       return { ...state, user: null, error: null, isAuth: false };
 

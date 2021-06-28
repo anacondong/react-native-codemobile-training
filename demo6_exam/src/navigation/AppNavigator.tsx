@@ -23,7 +23,6 @@ const RootStack = (props: any) => {
 
   const successTabOption = props => {
     return {
-      //title: "Welcome " + authReducer.user.username,
       title: "Success",
       headerStyle: {
         backgroundColor: '#119CED',

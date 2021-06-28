@@ -50,28 +50,11 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
       headerTitleStyle: { color: '#fff' },
       headerBackTitle: ' ',
     });
-  }, []);
+  }, [authReducer.isReady]);
 
-
-  const handleLogin = async () => {
-
-    // dispatch({ type: AUTH_LOGIN_REQUEST, payload: { username: account.username, password: account.password } })
-    const regAccJson = await AsyncStorage.getItem(AS_ACCOUNT);
-    if (regAccJson) {
-      const regAcc: AccountProps = JSON.parse(regAccJson);
-      if (
-        account.username === regAcc.username &&
-        account.password === regAcc.password
-      ) {
-        await AsyncStorage.setItem(AS_AUTHEN_SUCCESS, 'true')
-        navigation.dispatch(StackActions.replace('Success', { screen: 'Json' }));
-      } else {
-        Alert.alert('Failed Login');
-      }
-    } else {
-      Alert.alert('Failed Login');
-    }
-  };
+  const renderError = () => {
+    return (authReducer.error) ? <Text style={{ textAlign: 'center', color: "red" }}>{authReducer.error}</Text> : null;
+  }
 
   return (
     <ImageBackground
@@ -85,6 +68,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         resizeMode="contain"
       />
 
+      {renderError()}
 
       {/* authen section */}
       <View
@@ -116,7 +100,11 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
 
         {/* Login Btn section */}
 
-        <Button title="Login" onPress={handleLogin} />
+        <Button title="Login" onPress={() => {
+          dispatch({ type: AUTH_LOGIN_REQUEST, payload: { username: account.username, password: account.password } })
+        }
+
+        } />
 
         <View style={{ height: 16 }}></View>
 
