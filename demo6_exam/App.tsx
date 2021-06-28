@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthSelector } from './src/reducers/auth.reducer';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -10,21 +12,20 @@ import {
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import AppNavigator from './src/navigation/AppNavigator';
-import { AS_AUTHEN_SUCCESS } from './src/Constants';
+import { AUTH_LOGOUT } from './src/constants/Constants';
 
 interface AppProps { }
 
 const App: React.FunctionComponent<AppProps> = props => {
-  const [forceLogin, setforceLogin] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
+  const authReducer = useSelector(AuthSelector);
+  const dispatch = useDispatch();
   useEffect(() => {
     checkAuthen();
   }, [isReady]); // this is for force React Redender when this state has been changed
 
-  const checkAuthen = async () => {
-    const isAuthenSuccess = await AsyncStorage.getItem(AS_AUTHEN_SUCCESS);
-    setforceLogin(isAuthenSuccess !== 'true');
+  const checkAuthen = () => {
     setIsReady(true);
   };
 
@@ -35,8 +36,9 @@ const App: React.FunctionComponent<AppProps> = props => {
         {/* <SafeAreaView /> */}
         {isReady && (
           <AppNavigator
-            showAuthen={forceLogin}
+            showAuthen={!authReducer.isAuth}
             onLogout={() => {
+              dispatch({ type: AUTH_LOGOUT })
               setIsReady(false);
             }}
           />

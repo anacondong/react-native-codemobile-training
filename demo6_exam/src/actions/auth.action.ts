@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { AUTH_REQUEST, AUTH_FAILED, AUTH_SUCCESS } from './../constants/Constants';
+import { AUTH_REQUEST, AUTH_FAILED, AUTH_SUCCESS, AUTH_LOGOUT } from './../constants/Constants';
 import axios from 'axios';
 
 export const setAuthLogin = (payload: any) => ({
@@ -15,6 +15,10 @@ export const setAuthSuccess = (payload: any) => ({
 
 export const setAuthFailed = () => ({
     type: AUTH_FAILED,
+});
+
+export const setAuthLogout = () => ({
+    type: AUTH_LOGOUT
 });
 
 export const doAuthServer = async (payload: any) => {

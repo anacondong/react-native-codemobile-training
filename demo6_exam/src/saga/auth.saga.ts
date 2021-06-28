@@ -17,5 +17,5 @@ export function* authLoginWorker({ type, payload }) {
 }
 
 export function* authLogoutWorker() {
-  yield put(actions.setAuthFailed());
+  yield put(actions.setAuthLogout());
 }
