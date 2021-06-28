@@ -12,7 +12,7 @@ import { Button, Input } from 'react-native-elements';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamsList } from './RootNavigationParams';
+import { RootStackParamsList } from './navigation/RootNavigationParams';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthSelector } from './reducers/auth.reducer';

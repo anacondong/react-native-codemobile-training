@@ -15,7 +15,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { DongEntry } from './DongEntry';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStackParamsList } from './RootNavigationParams';
+import { RootStackParamsList } from './navigation/RootNavigationParams';
 import AsyncStorage from '@react-native-community/async-storage';
 import { AS_ACCOUNT } from './Constants';
 import { REGISTER_REQUEST } from './constants/Constants';

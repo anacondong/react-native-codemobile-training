@@ -2,17 +2,17 @@
 import React from 'react';
 import { Image, TouchableOpacity, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthSelector } from './reducers/auth.reducer';
+import { AuthSelector } from '../reducers/auth.reducer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import HomeScreen from './HomeScreen';
-import RegisterScreen from './RegisterScreen';
-import JSONFeedScreen from './JSONFeedScreen';
-import { AS_AUTHEN_SUCCESS } from './Constants';
+import HomeScreen from '../HomeScreen';
+import RegisterScreen from '../RegisterScreen';
+import JSONFeedScreen from '../JSONFeedScreen';
+import { AS_AUTHEN_SUCCESS } from '../Constants';
 import { Alert } from 'react-native';
-import ActivityScreen from './ActivityScreen';
+import ActivityScreen from '../ActivityScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -94,8 +94,8 @@ const tab1 = {
       resizeMode="contain"
       source={
         focused
-          ? require('./assets/img/ic_profile_select.png')
-          : require('./assets/img/ic_profile.png')
+          ? require('./../assets/img/ic_profile_select.png')
+          : require('./../assets/img/ic_profile.png')
       }
     />
   ),
@@ -112,8 +112,8 @@ const tab2 = {
       resizeMode="contain"
       source={
         focused
-          ? require('./assets/img/ic_card_select.png')
-          : require('./assets/img/ic_card.png')
+          ? require('./../assets/img/ic_card_select.png')
+          : require('./../assets/img/ic_card.png')
       }
     />
   ),

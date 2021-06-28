@@ -16,7 +16,7 @@ import { Youtube, YoutubeResult } from './types/youtube.interface';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamsList, RootTabParamsList } from './RootNavigationParams';
+import { RootStackParamsList, RootTabParamsList } from './navigation/RootNavigationParams';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { JsonfeedSelector } from './reducers/jsonfeed.reducer';
