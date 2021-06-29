@@ -1,7 +1,7 @@
 import * as actions from '../actions/jsonfeed.action';
-import {put, call, delay} from 'redux-saga/effects';
-import {YoutubeResult} from '../types/youtube.interface';
-import {AxiosResponse} from 'axios';
+import { put, call } from 'redux-saga/effects';
+import { YoutubeResult } from '../types/youtube.interface';
+import { AxiosResponse } from 'axios';
 
 export function* fetchJSONSaga() {
   try {

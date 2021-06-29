@@ -1,6 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import { useNavigation, StackActions } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -8,15 +7,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Button, Input } from 'react-native-elements';
-import { Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Button } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamsList } from './navigation/RootNavigationParams';
-import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthSelector } from './reducers/auth.reducer';
-import { AS_AUTHEN_SUCCESS, AS_ACCOUNT } from './Constants';
 import { DongEntry } from './DongEntry';
 import { AUTH_LOGIN_REQUEST } from './constants/Constants';
 
@@ -27,6 +22,11 @@ type HomeScreenNavigationProp = StackNavigationProp<
   RootStackParamsList,
   'Home'
 >;
+
+interface AccountProps {
+  username: string;
+  password: string;
+}
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
   const navigation = useNavigation<HomeScreenNavigationProp>();

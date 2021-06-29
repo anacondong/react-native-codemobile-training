@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import React, { useState } from 'react';
 import {
   View,
-  Text,
   ImageBackground,
-  TextInput,
-  TouchableOpacity,
   Image,
 } from 'react-native';
 
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { DongEntry } from './DongEntry';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -33,8 +28,6 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
   const navigation = useNavigation<RegisterScreenNavigationProps>();
 
   const [account, setAccount] = useState({ username: '', password: '' });
-
-  const route = useRoute<RouteProp<RootStackParamsList, 'Register'>>();
 
   const dispatch = useDispatch();
 

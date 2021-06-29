@@ -1,8 +1,7 @@
 import * as actions from '../actions/auth.action';
-import { put, call, delay } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 
 export function* authLoginWorker({ type, payload }) {
-
   try {
     const response = yield call(actions.doAuthServer, payload);
     console.log('authLoginWorker response', response);

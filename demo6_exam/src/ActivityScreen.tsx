@@ -19,7 +19,7 @@ const ActivityScreen: React.FunctionComponent<ActivityScreenProps> = props => {
           alignItems: 'flex-start',
         }}>
         <View style={{ flexDirection: 'column' }}>
-          {activityReducer.data.map(item => (
+          {activityReducer.data.map((item: any) => (
             <Text key={String(Math.random())}>{item}</Text>
           ))}
         </View>

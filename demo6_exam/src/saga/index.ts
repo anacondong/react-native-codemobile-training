@@ -2,7 +2,7 @@ import * as actionTypes from './../constants/Constants';
 import { takeEvery, all, takeLatest } from 'redux-saga/effects';
 import { fetchJSONSaga } from './jsonfeed.saga';
 import { addActivitySaga, clearActivitySaga } from './activity.saga';
-import { authLoginWorker, authLogoutWorker } from './auth.saga';
+import { authLoginWorker } from './auth.saga';
 import { registerRequestWorker } from './register.saga';
 
 export function* watchAll() {

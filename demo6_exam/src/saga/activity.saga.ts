@@ -1,9 +1,8 @@
 import * as actions from '../actions/activity.action';
-import {put, call, delay} from 'redux-saga/effects';
-import {YoutubeResult} from '../types/youtube.interface';
+import { put } from 'redux-saga/effects';
 
-export function* addActivitySaga(payload:any) {
-    yield put(actions.setActivityToAdd(payload));
+export function* addActivitySaga(payload: any) {
+  yield put(actions.setActivityToAdd(payload));
 }
 
 export function* clearActivitySaga() {

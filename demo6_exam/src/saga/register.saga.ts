@@ -1,5 +1,5 @@
 import * as actions from '../actions/register.action';
-import { put, call, delay } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 
 export function* registerRequestWorker({ type, payload }) {
 

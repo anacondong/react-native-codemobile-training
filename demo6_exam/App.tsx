@@ -1,16 +1,9 @@
-import AsyncStorage from '@react-native-community/async-storage';
+/* eslint-disable react-native/no-inline-styles */
 import { NavigationContainer } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthSelector } from './src/reducers/auth.reducer';
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
-import { Button } from 'react-native-elements';
+import { ActivityIndicator, StyleSheet, Text, View, StatusBar } from 'react-native'
 import AppNavigator from './src/navigation/AppNavigator';
 import { AUTH_LOGOUT } from './src/constants/Constants';
 
@@ -46,11 +39,23 @@ const App: React.FunctionComponent<AppProps> = props => {
       </View>
     </NavigationContainer>
   ) : (
-    <Button
-      title="Loading button"
-      loading
-    />
+    <View style={[styles.container, styles.horizontal]}>
+      <Text>Loading ...</Text>
+      <ActivityIndicator size="large" />
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  }
+});
 
 export default App;

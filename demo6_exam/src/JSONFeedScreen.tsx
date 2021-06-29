@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,32 +8,16 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  Platform,
   Alert,
 } from 'react-native';
-import axios from 'axios';
-import { Youtube, YoutubeResult } from './types/youtube.interface';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { CompositeNavigationProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamsList, RootTabParamsList } from './navigation/RootNavigationParams';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { Youtube } from './types/youtube.interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { JsonfeedSelector } from './reducers/jsonfeed.reducer';
 import { ACTIVITY_ADD, JSON_REQUEST } from './Constants';
 
-
-type JSONFeedScreenNavigationProps = CompositeNavigationProp<
-  StackNavigationProp<RootStackParamsList, 'Success'>,
-  BottomTabNavigationProp<RootTabParamsList, 'Json'>
->;
-
 interface JSONFeedScreenProps { }
 const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
-  const navigation = useNavigation<JSONFeedScreenNavigationProps>();
-  const route = useRoute<RouteProp<RootStackParamsList, 'Success'>>();
   const jsonfeedReducer = useSelector(JsonfeedSelector);
-  const dummyImg = 'https://scontent-lga3-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/204156627_192665129325543_2208976459849398308_n.jpg?tp=1&_nc_ht=scontent-lga3-1.cdninstagram.com&_nc_cat=103&_nc_ohc=SZC7cGhTRskAX_UMmLX&edm=AP_V10EBAAAA&ccb=7-4&oh=03e76db13604fba9c9fe8e1c540a9541&oe=60D6FB83&_nc_sid=4f375e';
 
   const dispatch = useDispatch();
 
@@ -57,7 +41,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
           <TouchableOpacity onPress={() => dispatch({ type: ACTIVITY_ADD, payload: item.title })}>
             <Image
               style={styles.listAvatar}
-              source={{ uri: dummyImg }}
+              source={require('./assets/img/youtubepic.jpg')}
             />
           </TouchableOpacity>
           {/* Title and Subtitle  */}
@@ -69,7 +53,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
 
         <Image
           style={styles.listYoutbeImage}
-          source={{ uri: dummyImg }}
+          source={require('./assets/img/youtubepic.jpg')}
         />
       </TouchableOpacity>
     );
@@ -82,7 +66,7 @@ const JSONFeedScreen: React.FunctionComponent<JSONFeedScreenProps> = props => {
       {/* pass by route  */}
       {/* <Text>{route.params?.username}</Text> */}
       <FlatList
-        // loading
+        // loading new feed
         refreshing={jsonfeedReducer.isFetching}
         onRefresh={() => dispatch({ type: JSON_REQUEST })}
         // for header  ListHeaderComponent={renderHeader}

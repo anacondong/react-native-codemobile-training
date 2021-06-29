@@ -1,8 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { Image, TouchableOpacity, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthSelector } from '../reducers/auth.reducer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -18,8 +16,6 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const RootStack = (props: any) => {
-
-  const authReducer = useSelector(AuthSelector);
 
   const successTabOption = props => {
     return {
@@ -76,13 +72,13 @@ const RootStack = (props: any) => {
 const SuccessTab = () => {
   return (
     <Tab.Navigator initialRouteName="Json">
-      <Tab.Screen name="Json" component={JSONFeedScreen} options={tab1} />
-      <Tab.Screen name="Activity" component={ActivityScreen} options={tab2} />
+      <Tab.Screen name="Json" component={JSONFeedScreen} options={jsonTab} />
+      <Tab.Screen name="Activity" component={ActivityScreen} options={activityTab} />
     </Tab.Navigator>
   );
 };
 
-const tab1 = {
+const jsonTab = {
   tabBarLabel: 'JSON',
   tabBarIcon: ({ focused }: any) => (
     <Image
@@ -100,7 +96,7 @@ const tab1 = {
   ),
 };
 
-const tab2 = {
+const activityTab = {
   tabBarLabel: 'Activity',
   tabBarIcon: ({ focused }: any) => (
     <Image
