@@ -8,14 +8,101 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from '../HomeScreen';
 import RegisterScreen from '../RegisterScreen';
 import JSONFeedScreen from '../JSONFeedScreen';
+import QRcodeScreen from '../QRcodeScreen'
+import TabScanner from '../TabScanner'
 import { AS_AUTHEN_SUCCESS } from '../Constants';
 import { Alert } from 'react-native';
 import ActivityScreen from '../ActivityScreen';
+import ScannerScreen from '../ScannerScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const RootStack = (props: any) => {
+
+  const SuccessTab = () => {
+    return (
+      <Tab.Navigator initialRouteName="Json">
+        <Tab.Screen name="Json" component={JSONFeedScreen} options={jsonTab} />
+        <Tab.Screen name="QR Code" component={QRcodeScreen} options={qrCodeTab} />
+        <Tab.Screen name="Barcode" component={TabScanner} options={scannerTab} />
+        <Tab.Screen name="Activity" component={ActivityScreen} options={activityTab} />
+      </Tab.Navigator>
+    );
+  };
+
+  const jsonTab = {
+    tabBarLabel: 'JSON',
+    tabBarIcon: ({ focused }: any) => (
+      <Image
+        style={{
+          height: 28,
+          width: 28,
+        }}
+        resizeMode="contain"
+        source={
+          focused
+            ? require('./../assets/img/ic_profile_select.png')
+            : require('./../assets/img/ic_profile.png')
+        }
+      />
+    ),
+  };
+
+  const qrCodeTab = {
+    tabBarLabel: 'QRcode',
+    tabBarIcon: ({ focused }: any) => (
+      <Image
+        style={{
+          height: 28,
+          width: 28,
+        }}
+        resizeMode="contain"
+        source={
+          focused
+            ? require('./../assets/img/ic_qr_code_press.png')
+            : require('./../assets/img/ic_qr_code_normal.png')
+        }
+      />
+    ),
+  };
+
+  const scannerTab = {
+    tabBarLabel: 'Scanner',
+    tabBarIcon: ({ focused }: any) => (
+      <Image
+        style={{
+          height: 28,
+          width: 28,
+        }}
+        resizeMode="contain"
+        source={
+          focused
+            ? require('./../assets/img/ic_qr_scan_press.png')
+            : require('./../assets/img/ic_qr_scan_normal.png')
+        }
+      />
+    ),
+  };
+
+  const activityTab = {
+    tabBarLabel: 'Activity',
+    tabBarIcon: ({ focused }: any) => (
+      <Image
+        style={{
+          height: 28,
+          width: 28,
+        }}
+        resizeMode="contain"
+        source={
+          focused
+            ? require('./../assets/img/ic_card_select.png')
+            : require('./../assets/img/ic_card.png')
+        }
+      />
+    ),
+  };
+
 
   const successTabOption = props => {
     return {
@@ -65,53 +152,13 @@ const RootStack = (props: any) => {
         component={SuccessTab}
         options={successTabOption(props)}
       />
+      <Stack.Screen
+        name="Scanner"
+        component={ScannerScreen}
+      />
     </Stack.Navigator>
   );
 };
 
-const SuccessTab = () => {
-  return (
-    <Tab.Navigator initialRouteName="Json">
-      <Tab.Screen name="Json" component={JSONFeedScreen} options={jsonTab} />
-      <Tab.Screen name="Activity" component={ActivityScreen} options={activityTab} />
-    </Tab.Navigator>
-  );
-};
-
-const jsonTab = {
-  tabBarLabel: 'JSON',
-  tabBarIcon: ({ focused }: any) => (
-    <Image
-      style={{
-        height: 28,
-        width: 28,
-      }}
-      resizeMode="contain"
-      source={
-        focused
-          ? require('./../assets/img/ic_profile_select.png')
-          : require('./../assets/img/ic_profile.png')
-      }
-    />
-  ),
-};
-
-const activityTab = {
-  tabBarLabel: 'Activity',
-  tabBarIcon: ({ focused }: any) => (
-    <Image
-      style={{
-        height: 28,
-        width: 28,
-      }}
-      resizeMode="contain"
-      source={
-        focused
-          ? require('./../assets/img/ic_card_select.png')
-          : require('./../assets/img/ic_card.png')
-      }
-    />
-  ),
-};
 
 export default RootStack;

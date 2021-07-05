@@ -3,14 +3,14 @@ import { View, TextInputProps } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
-interface DongEntryProps extends TextInputProps {
+interface InputEntryProps extends TextInputProps {
   icon: string;
   hint?: string;
   onValueChanged: (tet: string) => void; // or any
   isPassword?: boolean;
 }
 
-export const DongEntry: React.FunctionComponent<DongEntryProps> = props => {
+export const InputEntry: React.FunctionComponent<InputEntryProps> = props => {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       {/* Icon */}

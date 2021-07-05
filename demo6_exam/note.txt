@@ -65,11 +65,29 @@ Variables (3 types)
     add
     pod 'XCDYouTubeKit', '~> 2.8'
 
+ชุดที่สอง
+yarn add react-native-iphone-x-helper react-native-svg react-native-qrcode-svg react-native-camera react-native-qrcode-scanner
+
+npx react-native link react-native-iphone-x-helper
+npx react-native link react-native-svg
+npx react-native link react-native-camera 
+npx react-native link react-native-qrcode-scanner
 
 
 <uses-permission android:name="android.permission.CAMERA"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+add this line into android/app/build.gradle
+missingDimensionStrategy 'react-native-camera', 'general'
+multiDexEnabled true
+
+npx react-native run-android device
+
+
+
+
+
 
 iOS
 - fix duplicate font.ttf

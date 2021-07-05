@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 
 import { Button } from 'react-native-elements';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { DongEntry } from './DongEntry';
+import { useNavigation } from '@react-navigation/native';
+import { InputEntry } from './components/InputEntry';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamsList } from './navigation/RootNavigationParams';
@@ -72,7 +72,7 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
           flexDirection: 'column',
         }}>
         {/* Username section */}
-        <DongEntry
+        <InputEntry
           icon="user"
           hint="user name"
           onValueChanged={txt => {
@@ -83,7 +83,7 @@ const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = props => {
         <View style={{ height: 16 }}></View>
 
         {/* Password section */}
-        <DongEntry
+        <InputEntry
           icon="lock"
           hint="password"
           onValueChanged={txt => {

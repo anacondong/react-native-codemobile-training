@@ -30,6 +30,8 @@ target 'demo6_exam' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'demo6_examTests' do
     inherit! :complete
     # Pods for testing

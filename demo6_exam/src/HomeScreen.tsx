@@ -12,7 +12,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamsList } from './navigation/RootNavigationParams';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthSelector } from './reducers/auth.reducer';
-import { DongEntry } from './DongEntry';
+import { InputEntry } from './components/InputEntry';
 import { AUTH_LOGIN_REQUEST } from './constants/Constants';
 
 interface HomeScreenProps { }
@@ -80,7 +80,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
           flexDirection: 'column',
         }}>
         {/* Username section */}
-        <DongEntry
+        <InputEntry
           icon="user"
           hint="user name"
           onValueChanged={txt => {
@@ -89,7 +89,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
         />
 
         {/* Password section */}
-        <DongEntry
+        <InputEntry
           icon="lock"
           hint="password"
           onValueChanged={txt => {
