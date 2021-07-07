@@ -21,14 +21,11 @@ type TabScannerNavigationProp = StackNavigationProp<
 >;
 
 const TabScanner: React.FunctionComponent<TabScannerProps> = props => {
-  const onResult = (result: string) => {
-    Alert.alert('Result is : ' + result);
-  };
 
   const navigation = useNavigation<TabScannerNavigationProp>();
 
   const onClickScan = () => {
-    navigation.navigate('Scanner', { onResult });
+    navigation.navigate('Scanner');
   };
 
   return (

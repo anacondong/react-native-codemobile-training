@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -26,22 +26,18 @@ const ScannerScreen: React.FunctionComponent<ScannerScreenProps> = props => {
   });
 
   const onSuccess = (result: string) => {
-    route.params?.onResult(result);
+    Alert.alert('result >>> ', result);
     navigation.goBack();
   };
 
   const showScanner = () => {
     return (
       <QRCodeScanner
-        ref={scannerRef}
         showMarker
         onRead={e => onSuccess(e.data)}
-        style={{ flex: 1 }}
         bottomContent={
-          <TouchableOpacity
-            onPress={() => scannerRef.current.reactivate()}
-            style={styles.buttonTouchable}>
-            <Text style={styles.buttonText}>SCAN</Text>
+          <TouchableOpacity style={styles.buttonTouchable}>
+            <Text style={styles.buttonText}>OK. Got it!</Text>
           </TouchableOpacity>
         }
       />
