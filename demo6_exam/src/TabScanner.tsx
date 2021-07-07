@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Alert,
   StyleSheet,
@@ -13,6 +13,8 @@ import { ifIphoneX } from 'react-native-iphone-x-helper';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamsList } from './navigation/RootNavigationParams';
+import { CodeScanSelector } from './reducers/codescan.reducer';
+import { CODE_SCAN_CLEAR_REQUEST } from './constants/Constants';
 
 interface TabScannerProps { }
 type TabScannerNavigationProp = StackNavigationProp<
@@ -22,8 +24,9 @@ type TabScannerNavigationProp = StackNavigationProp<
 
 const TabScanner: React.FunctionComponent<TabScannerProps> = props => {
 
+  const codeScanSelector = useSelector(CodeScanSelector);
   const navigation = useNavigation<TabScannerNavigationProp>();
-
+  const dispatch = useDispatch();
   const onClickScan = () => {
     navigation.navigate('Scanner');
   };
@@ -43,6 +46,9 @@ const TabScanner: React.FunctionComponent<TabScannerProps> = props => {
         }}
         source={require('./assets/img/header_react_native.png')}
       />
+      <Text>CODE: {(codeScanSelector) ? codeScanSelector.codeScan : "Please Click Scan !!"}
+      </Text>
+      <Text onPress={() => dispatch({ type: CODE_SCAN_CLEAR_REQUEST })}>Clear</Text>
       <TouchableOpacity
         style={{
           flex: 1,

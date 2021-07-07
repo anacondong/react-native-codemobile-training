@@ -1,12 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
-
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamsList } from './navigation/RootNavigationParams';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { CODE_SCAN_ADD_REQUEST } from './constants/Constants';
 interface ScannerScreenProps { }
 type ScannerScreenNavigationProp = StackNavigationProp<
   RootStackParamsList,
@@ -14,6 +15,8 @@ type ScannerScreenNavigationProp = StackNavigationProp<
 >;
 
 const ScannerScreen: React.FunctionComponent<ScannerScreenProps> = props => {
+  const dispatch = useDispatch();
+
   const scannerRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const navigation = useNavigation<ScannerScreenNavigationProp>();
@@ -26,7 +29,7 @@ const ScannerScreen: React.FunctionComponent<ScannerScreenProps> = props => {
   });
 
   const onSuccess = (result: string) => {
-    Alert.alert('result >>> ', result);
+    dispatch({ type: CODE_SCAN_ADD_REQUEST, payload: result })
     navigation.goBack();
   };
 
